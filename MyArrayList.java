@@ -24,7 +24,14 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public boolean add(T element) {
-        // ...
+        //if the array size is greater than the cap minus 1 (accounting for index 0) then double the array
+        if (sz > (cap-1)) {
+            doubleArray();
+        }
+        //once we have enough space then set the element to the last position in the array
+        myArr[sz] = element; 
+        //increase the size to track the last index and latest array size       
+        sz++;
         return true; // (as specified by Collection.add(E))
     }
 
@@ -32,23 +39,42 @@ public class MyArrayList<T> implements MyList<T> {
         if (index < 0 || sz < index) {
             throw new IndexOutOfBoundsException();
         }
-        // ...
+        //check to make sure the array has room to shift right, if not then double
+        if (sz > (cap-1)) {
+            doubleArray();
+        }
+        //with enough space then we shift everything right from the index provided
+        shiftRight(index);
+        //then we assign the index to the element provided
+        myArr[index] = element;
+        //increase the size to track the last index and array size
+        sz++;
+
     }
 
     public void clear() {
-        // ...
+        //set myArr to a new array with default size
+        myArr = createNewArray(DEFAULT_SIZE);
     }
 
     public boolean contains(T element) {
-        // ...
-        return false;
+        //new variable to check if element is in the array
+        boolean contains = false;
+        //for each element loop through and check against the element provided
+        for(T e: myArr){
+            if( e == element){
+                contains = true;
+            }
+        }
+        return contains;
     }
 
     public T get(int index) {
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
         }
-        // ...
+        //If it's not out of bounds then return the element at the provided index
+        return myArr[index];
     }
 
     public int indexOf(T element) {
@@ -90,7 +116,7 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public int size() {
-        return 0;
+        return sz;
     }
 
     // Helper functions
@@ -106,6 +132,7 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     private T[] createNewArray(int length) {
+        //confused on what this is doing, are we changing the reference to the original array?
         T[] myArr = arrType.cast(Array.newInstance(dataType, length));
         return myArr;
     }
