@@ -58,14 +58,16 @@ public class MyArrayList<T> implements MyList<T> {
 
         //reset the size to zero
         sz = 0;
+        cap = DEFAULT_SIZE;
     }
 
     public boolean contains(T element) {
         //new variable to check if element is in the array
         boolean contains = false;
         //for each element loop through and check against the element provided
+
         for(T e: myArr){
-            if( e == element){
+            if( e.equals(element) ){
                 contains = true;
                 break;
             }
@@ -85,7 +87,7 @@ public class MyArrayList<T> implements MyList<T> {
         //run a loop to find the first index of some element and break the loop, return -1 if it is not there
         int index = -1;
         for(int i = 0; i < sz; i++){
-            if(myArr[i] == element){
+            if(myArr.equals(element) ){
                 index = i;
                 break;
             }
@@ -95,19 +97,17 @@ public class MyArrayList<T> implements MyList<T> {
 
     public boolean isEmpty() {
         //if size is greater than zero then we've added at least one element
-        boolean empty = true;
-        if(sz > 0){
-            empty = false;
-        }
+        boolean empty = (sz > 0);
         return empty;
     }
 
     public int lastIndexOf(T element) {
         //same as index of but without the break, this will keep going and capture the last instace of the element in the array
         int index = -1;
-        for(int i = 0; i < sz; i++){
-            if(myArr[i] == element){
+        for(int i = sz-1; i <= 0; i--){
+            if(myArr.equals(element)) {
                 index = i;
+                break;
             }
         }
         return index;
@@ -135,7 +135,7 @@ public class MyArrayList<T> implements MyList<T> {
         //loop through the array to find the first instance of the element
         boolean removed = false;
         for(int i = 0; i < sz; i++){
-            if(myArr[i] == element){
+            if(myArr.equals(element)){
                 //call removed with the index if present, flag the removal and break out of the loop
                 remove(i);
                 removed = true;
@@ -151,7 +151,7 @@ public class MyArrayList<T> implements MyList<T> {
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
         }
-        T ret = null;
+        T ret = myArr[index];
         //set the index to the new element, no change in size needed
         myArr[index] = element;
         return ret;
