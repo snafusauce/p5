@@ -67,7 +67,13 @@ public class MyArrayList<T> implements MyList<T> {
         //for each element loop through and check against the element provided
 
         for(T e: myArr){
-            if( e.equals(element) ){
+            //if either element is null then set contains == to true if both ar null since that's a match or false if not and break
+            if(e == null || element == null){
+                contains = (e == null && element == null);
+                break;
+            } 
+            //if neither is null then check for equals and set contains == to true
+            else if(e.equals(element) ){
                 contains = true;
                 break;
             }
@@ -97,14 +103,14 @@ public class MyArrayList<T> implements MyList<T> {
 
     public boolean isEmpty() {
         //if size is greater than zero then we've added at least one element
-        boolean empty = (sz > 0);
+        boolean empty = (sz == 0);
         return empty;
     }
 
     public int lastIndexOf(T element) {
         //same as index of but without the break, this will keep going and capture the last instace of the element in the array
         int index = -1;
-        for(int i = sz-1; i <= 0; i--){
+        for(int i = sz-1; i >= 0; i--){
             if(myArr.equals(element)) {
                 index = i;
                 break;
