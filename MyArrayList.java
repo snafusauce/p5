@@ -93,7 +93,7 @@ public class MyArrayList<T> implements MyList<T> {
         //run a loop to find the first index of some element and break the loop, return -1 if it is not there
         int index = -1;
         for(int i = 0; i < sz; i++){
-            if(myArr.equals(element) ){
+            if(myArr[i].equals(element) ){
                 index = i;
                 break;
             }
@@ -111,7 +111,7 @@ public class MyArrayList<T> implements MyList<T> {
         //same as index of but without the break, this will keep going and capture the last instace of the element in the array
         int index = -1;
         for(int i = sz-1; i >= 0; i--){
-            if(myArr.equals(element)) {
+            if(myArr[i].equals(element)) {
                 index = i;
                 break;
             }
@@ -141,7 +141,7 @@ public class MyArrayList<T> implements MyList<T> {
         //loop through the array to find the first instance of the element
         boolean removed = false;
         for(int i = 0; i < sz; i++){
-            if(myArr.equals(element)){
+            if(myArr[i].equals(element)){
                 //call removed with the index if present, flag the removal and break out of the loop
                 remove(i);
                 removed = true;
