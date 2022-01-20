@@ -40,7 +40,7 @@ public class MyArrayList<T> implements MyList<T> {
             throw new IndexOutOfBoundsException();
         }
         //check to make sure the array has room to shift right, if not then double
-        if (sz > (cap-1)) {
+        if (sz >= cap) {
             doubleArray();
         }
         //with enough space then we shift everything right from the index provided
@@ -62,22 +62,11 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public boolean contains(T element) {
-        //new variable to check if element is in the array
-        boolean contains = false;
-        //for each element loop through and check against the element provided
 
-        for(T e: myArr){
-            //if either element is null then set contains == to true if both ar null since that's a match or false if not and break
-            if(e == null || element == null){
-                contains = (e == null && element == null);
-                break;
-            } 
-            //if neither is null then check for equals and set contains == to true
-            else if(e.equals(element) ){
-                contains = true;
-                break;
-            }
-        }
+        //new variable to check if element is in the array
+        boolean contains = (indexOf(element) != -1  ? true : false );
+        
+    
         return contains;
     }
 
@@ -93,7 +82,9 @@ public class MyArrayList<T> implements MyList<T> {
         //run a loop to find the first index of some element and break the loop, return -1 if it is not there
         int index = -1;
         for(int i = 0; i < sz; i++){
-            if(myArr[i].equals(element) ){
+            //if the input is null then check if the array at i is null if both are true then return i
+            //else if the input is null then check if the array matches element (since we know element is not null)
+            if(element ==null ? myArr[i]==null : element.equals(myArr[i])){
                 index = i;
                 break;
             }
@@ -111,7 +102,7 @@ public class MyArrayList<T> implements MyList<T> {
         //same as index of but without the break, this will keep going and capture the last instace of the element in the array
         int index = -1;
         for(int i = sz-1; i >= 0; i--){
-            if(myArr[i].equals(element)) {
+            if(element ==null ? myArr[i]==null : element.equals(myArr[i])) {
                 index = i;
                 break;
             }
@@ -120,10 +111,10 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public T remove(int index) {
-        T ret = null;
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
         }
+        T ret = myArr[index];
         // Move everything to the left
         shiftLeft(index);
 
@@ -141,7 +132,7 @@ public class MyArrayList<T> implements MyList<T> {
         //loop through the array to find the first instance of the element
         boolean removed = false;
         for(int i = 0; i < sz; i++){
-            if(myArr[i].equals(element)){
+            if(element ==null ? myArr[i]==null : element.equals(myArr[i])){
                 //call removed with the index if present, flag the removal and break out of the loop
                 remove(i);
                 removed = true;
@@ -166,7 +157,7 @@ public class MyArrayList<T> implements MyList<T> {
     public int size() {
         return sz;
     }
-
+    
     // Helper functions
     private void doubleArray() {
         cap *= 2;
