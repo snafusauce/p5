@@ -23,6 +23,7 @@ public class MyArrayList<T> implements MyList<T> {
         this(arrClass, DEFAULT_SIZE);
     }
 
+    //O(1)
     public boolean add(T element) {
         //if the array size is greater than the cap minus 1 (accounting for index 0) then double the array
         if (sz > (cap-1)) {
@@ -34,7 +35,7 @@ public class MyArrayList<T> implements MyList<T> {
         sz++;
         return true; // (as specified by Collection.add(E))
     }
-
+    //O(n) because of shift right
     public void add(int index, T element) {
         if (index < 0 || sz < index) {
             throw new IndexOutOfBoundsException();
@@ -51,7 +52,7 @@ public class MyArrayList<T> implements MyList<T> {
         sz++;
 
     }
-
+    //O(1)
     public void clear() {
         //set myArr to a new array with default size
         myArr = createNewArray(DEFAULT_SIZE);
@@ -60,7 +61,7 @@ public class MyArrayList<T> implements MyList<T> {
         sz = 0;
         cap = DEFAULT_SIZE;
     }
-
+    //O(n)
     public boolean contains(T element) {
 
         //new variable to check if element is in the array
@@ -69,7 +70,7 @@ public class MyArrayList<T> implements MyList<T> {
     
         return contains;
     }
-
+    //O(1)
     public T get(int index) {
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
@@ -77,7 +78,7 @@ public class MyArrayList<T> implements MyList<T> {
         //If it's not out of bounds then return the element at the provided index
         return myArr[index];
     }
-
+    //O(n)
     public int indexOf(T element) {
         //run a loop to find the first index of some element and break the loop, return -1 if it is not there
         int index = -1;
@@ -91,13 +92,13 @@ public class MyArrayList<T> implements MyList<T> {
         }
         return index;
     }
-
+    //O(1)
     public boolean isEmpty() {
         //if size is greater than zero then we've added at least one element
         boolean empty = (sz == 0);
         return empty;
     }
-
+    //O(n)
     public int lastIndexOf(T element) {
         //same as index of but without the break, this will keep going and capture the last instace of the element in the array
         int index = -1;
@@ -109,7 +110,7 @@ public class MyArrayList<T> implements MyList<T> {
         }
         return index;
     }
-
+    //O(n) because of shift left
     public T remove(int index) {
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
@@ -127,7 +128,7 @@ public class MyArrayList<T> implements MyList<T> {
             }
         return ret;
     }
-
+    //O(n)
     public boolean remove(T element) {
         //loop through the array to find the first instance of the element
         boolean removed = false;
@@ -143,7 +144,7 @@ public class MyArrayList<T> implements MyList<T> {
         //informs if the item was present or not
         return removed;
     }
-
+    //O(1)
     public T set(int index, T element) {
         if (index < 0 || sz <= index) {
             throw new IndexOutOfBoundsException();
@@ -153,7 +154,7 @@ public class MyArrayList<T> implements MyList<T> {
         myArr[index] = element;
         return ret;
     }
-
+    //O(1)
     public int size() {
         return sz;
     }
