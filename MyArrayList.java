@@ -23,10 +23,6 @@ public class MyArrayList<T> implements MyList<T> {
         this(arrClass, DEFAULT_SIZE);
     }
 
-    public MyArrayList() {
-    }
-
-
     //O(1)
     public boolean add(T element) {
         //if the array size is greater than the cap minus 1 (accounting for index 0) then double the array

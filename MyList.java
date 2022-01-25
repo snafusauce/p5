@@ -1,5 +1,5 @@
 /**
- * MyList is the superclass for all of it's derived 
+ * MyList is the interface for all of it's derived 
  * subclasses. You are given the basic interface that 
  * every MyList must support.
  */
